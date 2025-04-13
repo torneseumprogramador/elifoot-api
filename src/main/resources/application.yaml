@@ -7,6 +7,17 @@ spring:
   jpa:
     open-in-view: false
     show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true;
 
   flyway:
     enabled: true
+
+jwt:
+  public:
+    key: classpath:authz.pub
+  private:
+    key: classpath:authz.pem

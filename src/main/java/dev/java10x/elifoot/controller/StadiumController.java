@@ -22,7 +22,7 @@ public class StadiumController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Page<StadiumResponse> list(Pageable pageable) {
-        return findStadiumService.execute(pageable);
+        return findStadiumService.findAll(pageable);
     }
 
     @PostMapping

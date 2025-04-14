@@ -8,6 +8,8 @@ import dev.java10x.elifoot.repository.ClubRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 @RequiredArgsConstructor
 public class CreateClubService {
@@ -15,8 +17,14 @@ public class CreateClubService {
     private final ClubRepository clubRepository;
     private final ClubMapper clubMapper;
 
+    private final FindStadiumService findStadiumService;
+
     public ClubResponse execute(CreateClubRequest request) {
-        Club club = clubRepository.save(clubMapper.toEntity(request));
+        Club newClub = clubMapper.toEntity(request);
+        if (Objects.nonNull(newClub.getStadium())) {
+            newClub.setStadium(findStadiumService.findById(newClub.getStadium().getId()));
+        }
+        Club club = clubRepository.save(newClub);
         return clubMapper.toResponse(club);
     }
 }

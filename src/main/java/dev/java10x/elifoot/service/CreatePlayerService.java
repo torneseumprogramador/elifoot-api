@@ -15,8 +15,12 @@ public class CreatePlayerService {
     private final PlayerRepository playerRepository;
     private final PlayerMapper playerMapper;
 
+    private final FindClubService findClubService;
+
     public PlayerResponse execute(CreatePlayerRequest request) {
-        Player player = playerRepository.save(playerMapper.toEntity(request));
+        Player player = playerMapper.toEntity(request);
+        player.setClub(findClubService.findById(request.getClubId()));
+        playerRepository.save(player);
         return playerMapper.toResponse(player);
     }
 }

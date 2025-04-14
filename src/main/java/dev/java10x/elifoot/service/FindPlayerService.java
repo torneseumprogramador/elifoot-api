@@ -2,6 +2,7 @@ package dev.java10x.elifoot.service;
 
 import dev.java10x.elifoot.controller.response.PlayerDetailResponse;
 import dev.java10x.elifoot.controller.response.PlayerResponse;
+import dev.java10x.elifoot.exception.ResourceNotFoundException;
 import dev.java10x.elifoot.mapper.PlayerMapper;
 import dev.java10x.elifoot.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ public class FindPlayerService {
     public PlayerDetailResponse findById(Long id) {
         return playerRepository.findById(id)
                 .map(playerMapper::toDetailResponse)
-                .orElse(null);
+                .orElseThrow(() -> new ResourceNotFoundException("Player not found for id: " + id));
     }
 
     public List<PlayerResponse> findByClubId(Long clubId) {

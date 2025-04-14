@@ -18,6 +18,5 @@ public class CreateStadiumService {
     public StadiumResponse execute(CreateStadiumRequest request) {
         Stadium stadium = stadiumRepository.save(stadiumMapper.toEntity(request));
         return stadiumMapper.toResponse(stadium);
-
     }
 }

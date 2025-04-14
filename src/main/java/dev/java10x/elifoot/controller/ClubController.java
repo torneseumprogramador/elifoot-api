@@ -4,6 +4,7 @@ import dev.java10x.elifoot.controller.request.CreateClubRequest;
 import dev.java10x.elifoot.controller.response.ClubDetailResponse;
 import dev.java10x.elifoot.controller.response.ClubResponse;
 import dev.java10x.elifoot.controller.response.PlayerResponse;
+import dev.java10x.elifoot.mapper.ClubMapper;
 import dev.java10x.elifoot.service.CreateClubService;
 import dev.java10x.elifoot.service.FindClubService;
 import jakarta.validation.Valid;
@@ -22,6 +23,7 @@ public class ClubController {
 
     private final FindClubService findClubService;
     private final CreateClubService createClubService;
+    private final ClubMapper clubMapper;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -32,7 +34,7 @@ public class ClubController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ClubDetailResponse get(@PathVariable Long id) {
-        return findClubService.findById(id);
+        return clubMapper.toDetailResponse(findClubService.findById(id));
     }
 
     @GetMapping("/{id}/players")

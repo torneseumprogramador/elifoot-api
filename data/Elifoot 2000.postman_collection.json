@@ -41,7 +41,14 @@
 			"name": "Listar stadiums",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
@@ -73,13 +80,20 @@
 			"name": "Criar novo stadium",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Beira Rio\",\r\n    \"city\": \"Porto Alegre\",\r\n    \"capacity\": 123123\r\n}",
+					"raw": "{\r\n    \"name\": \"Beira Rio\",\r\n    \"city\": \"Porto Alegre\",\r\n    \"capacity\": 1111\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -104,7 +118,14 @@
 			"name": "Listar clubs",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
@@ -156,12 +177,19 @@
 			"name": "Listar players by club",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/clubs/34/players",
+					"raw": "http://localhost:8080/clubs/1/players",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -169,7 +197,7 @@
 					"port": "8080",
 					"path": [
 						"clubs",
-						"34",
+						"1",
 						"players"
 					]
 				}
@@ -218,7 +246,14 @@
 			"name": "Listar players",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
@@ -270,13 +305,20 @@
 			"name": "Criar novo player",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Neymar\",\r\n    \"position\": \"FORWARD\",\r\n    \"shirtNumber\": 11,\r\n    \"clubId\": 34\r\n}",
+					"raw": "{\r\n    \"name\": \"Renan\",\r\n    \"position\": \"FORWARD\",\r\n    \"shirtNumber\": 11,\r\n    \"clubId\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -307,7 +349,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Renan\",\r\n    \"email\": \"renanlessa@gmail.com\",    \r\n    \"password\": \"renan\",\r\n    \"roles\": [1,2]\r\n}",
+					"raw": "{\r\n    \"name\": \"Renan\",\r\n    \"email\": \"renanlessa@gmail.com\",    \r\n    \"password\": \"renan\",\r\n    \"scopes\": [1,2]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

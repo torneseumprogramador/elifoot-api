@@ -22,5 +22,5 @@ public class CreateUserRequest {
     private String password;
     @NotNull
     @NotEmpty
-    private List<Long> roles;
+    private List<Long> scopes;
 }

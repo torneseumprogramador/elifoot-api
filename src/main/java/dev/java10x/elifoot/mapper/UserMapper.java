@@ -2,7 +2,7 @@ package dev.java10x.elifoot.mapper;
 
 import dev.java10x.elifoot.controller.request.CreateUserRequest;
 import dev.java10x.elifoot.controller.response.UserResponse;
-import dev.java10x.elifoot.entity.Role;
+import dev.java10x.elifoot.entity.Scopes;
 import dev.java10x.elifoot.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,27 +14,27 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    @Mapping(target = "roles", source = "roles", qualifiedByName = "mapRoleIdsToRoleEntities")
+    @Mapping(target = "scopes", source = "scopes", qualifiedByName = "mapScopeIdsToScopeEntities")
     User toEntity(CreateUserRequest request);
 
-    @Mapping(target = "roles", source = "roles", qualifiedByName = "mapRoleEntitiesToStringRoles")
+    @Mapping(target = "scopes", source = "scopes", qualifiedByName = "mapScopeEntitiesToStringScopes")
     UserResponse toResponse(User user);
 
-    @Named("mapRoleIdsToRoleEntities")
-    default List<Role> mapRoleIdsToRoleEntities(List<Long> roleIds) {
-        if (roleIds == null) return Collections.emptyList();
+    @Named("mapScopeIdsToScopeEntities")
+    default List<Scopes> mapScopeIdsToScopeEntities(List<Long> scopeIds) {
+        if (scopeIds == null) return Collections.emptyList();
 
-        return roleIds.stream()
-                .map(id -> Role.builder().id(id).build())
+        return scopeIds.stream()
+                .map(id -> Scopes.builder().id(id).build())
                 .toList();
     }
 
-    @Named("mapRoleEntitiesToStringRoles")
-    default List<String> mapRoleEntitiesToStringRoles(List<Role> roles) {
-        if (roles == null) return Collections.emptyList();
+    @Named("mapScopeEntitiesToStringScopes")
+    default List<String> mapScopeEntitiesToStringScopes(List<Scopes> scopes) {
+        if (scopes == null) return Collections.emptyList();
 
-        return roles.stream()
-                .map(Role::getName)
+        return scopes.stream()
+                .map(Scopes::getName)
                 .toList();
     }
 }

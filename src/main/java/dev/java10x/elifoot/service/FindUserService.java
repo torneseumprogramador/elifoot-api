@@ -2,7 +2,7 @@ package dev.java10x.elifoot.service;
 
 import dev.java10x.elifoot.controller.request.LoginRequest;
 import dev.java10x.elifoot.controller.response.LoginResponse;
-import dev.java10x.elifoot.entity.Role;
+import dev.java10x.elifoot.entity.Scopes;
 import dev.java10x.elifoot.entity.User;
 import dev.java10x.elifoot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +33,8 @@ public class FindUserService {
         }
 
         User usuario = optUser.get();
-        List<String> roles = usuario.getRoles().stream()
-                .map(Role::getName)
+        List<String> scopes = usuario.getScopes().stream()
+                .map(Scopes::getName)
                 .toList();
         long expiresIn = 600L;
 
@@ -44,7 +44,7 @@ public class FindUserService {
                 .expiresAt(Instant.now().plusSeconds(expiresIn))
                 .issuedAt(Instant.now())
                 .claim("email", usuario.getEmail())
-                .claim("scope", roles)
+                .claim("scope", scopes)
                 .build();
 
         String token = jwtEncoder.encode(JwtEncoderParameters.from(jwt)).getTokenValue();

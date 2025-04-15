@@ -5,6 +5,7 @@ import dev.java10x.elifoot.controller.response.ClubDetailResponse;
 import dev.java10x.elifoot.controller.response.ClubResponse;
 import dev.java10x.elifoot.entity.Club;
 import dev.java10x.elifoot.entity.Stadium;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
@@ -18,6 +19,7 @@ class ClubMapperTest {
     private final ClubMapper mapper = Mappers.getMapper(ClubMapper.class);
 
     @Test
+    @DisplayName("Should map Club entity to ClubResponse")
     void toResponse() {
         // Given
         Club club = new Club();
@@ -38,6 +40,7 @@ class ClubMapperTest {
     }
 
     @Test
+    @DisplayName("Should map Club entity to ClubDetailResponse")
     void toDetailResponse() {
         // Given
         Club club = new Club();
@@ -71,6 +74,7 @@ class ClubMapperTest {
     }
 
     @Test
+    @DisplayName("Should map CreateClubRequest to Club entity")
     void toEntity() {
         // Given
         CreateClubRequest request = new CreateClubRequest();

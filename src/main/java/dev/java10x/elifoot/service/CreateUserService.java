@@ -2,7 +2,7 @@ package dev.java10x.elifoot.service;
 
 import dev.java10x.elifoot.controller.request.CreateUserRequest;
 import dev.java10x.elifoot.controller.response.UserResponse;
-import dev.java10x.elifoot.entity.Role;
+import dev.java10x.elifoot.entity.Scopes;
 import dev.java10x.elifoot.entity.User;
 import dev.java10x.elifoot.exception.ResourceAlreadyExistsException;
 import dev.java10x.elifoot.mapper.UserMapper;
@@ -21,7 +21,7 @@ public class CreateUserService {
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
 
-    private final FindRoleService findRoleService;
+    private final FindScopeService findScopeService;
 
     public UserResponse create(CreateUserRequest request) {
 
@@ -29,13 +29,13 @@ public class CreateUserService {
             throw new ResourceAlreadyExistsException("Email already exists, email: " + request.getEmail());
         }
 
-        List<Role> roles = request.getRoles().stream()
-                .map(findRoleService::findById)
+        List<Scopes> scopes = request.getScopes().stream()
+                .map(findScopeService::findById)
                 .toList();
 
         User newUser = userMapper.toEntity(request);
         newUser.setPassword(passwordEncoder.encode(request.getPassword()));
-        newUser.setRoles(roles);
+        newUser.setScopes(scopes);
         User user = userRepository.save(userMapper.toEntity(request));
         return userMapper.toResponse(user);
     }

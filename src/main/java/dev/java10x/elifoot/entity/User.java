@@ -26,10 +26,10 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "users_roles",
+            name = "users_scopes",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+            inverseJoinColumns = @JoinColumn(name = "scope_id")
     )
-    private List<Role> roles = new ArrayList<>();
+    private List<Scopes> scopes = new ArrayList<>();
 
 }

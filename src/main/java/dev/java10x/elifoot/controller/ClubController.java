@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,24 +26,28 @@ public class ClubController {
     private final CreateClubService createClubService;
     private final ClubMapper clubMapper;
 
+    @PreAuthorize("hasAnyAuthority('SCOPE_club:read', 'SCOPE_admin:all')")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Page<ClubResponse> list(Pageable pageable) {
         return findClubService.findAll(pageable);
     }
 
+    @PreAuthorize("hasAnyAuthority('SCOPE_club:read', 'SCOPE_admin:all')")
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ClubDetailResponse get(@PathVariable Long id) {
         return clubMapper.toDetailResponse(findClubService.findById(id));
     }
 
+    @PreAuthorize("hasAnyAuthority('SCOPE_club:read', 'SCOPE_admin:all')")
     @GetMapping("/{id}/players")
     @ResponseStatus(HttpStatus.OK)
     public List<PlayerResponse> getPlayersByClub(@PathVariable Long id) {
         return findClubService.findByClubId(id);
     }
 
+    @PreAuthorize("hasAnyAuthority('SCOPE_club:write', 'SCOPE_admin:all')")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ClubResponse create(@Valid @RequestBody CreateClubRequest request) {

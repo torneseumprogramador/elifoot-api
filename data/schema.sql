@@ -76,7 +76,7 @@ INSERT INTO player (id, name, position, shirt_number, club_id) VALUES
     (nextval('player_seq'), 'Ronald Araújo', 'DEFENDER', 4, 6);
 
 CREATE SEQUENCE users_seq START WITH 1 INCREMENT BY 1;
-CREATE SEQUENCE roles_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE scopes_seq START WITH 1 INCREMENT BY 1;
 
 CREATE TABLE users (
     id BIGINT PRIMARY KEY DEFAULT NEXTVAL('users_seq'),
@@ -86,24 +86,31 @@ CREATE TABLE users (
     active BOOLEAN NOT NULL DEFAULT true
 );
 
-CREATE TABLE roles (
-    id BIGINT PRIMARY KEY DEFAULT NEXTVAL('roles_seq'),
+CREATE TABLE scopes (
+    id BIGINT PRIMARY KEY DEFAULT NEXTVAL('scopes_seq'),
     name VARCHAR(50) NOT NULL UNIQUE
 );
 
-CREATE TABLE users_roles (
+CREATE TABLE users_scopes (
     user_id BIGINT NOT NULL,
-    role_id BIGINT NOT NULL,
-    PRIMARY KEY (user_id, role_id),
-    CONSTRAINT fk_user_roles_user FOREIGN KEY (user_id) REFERENCES users(id),
-    CONSTRAINT fk_user_roles_role FOREIGN KEY (role_id) REFERENCES roles(id)
+    scope_id BIGINT NOT NULL,
+    PRIMARY KEY (user_id, scope_id),
+    CONSTRAINT fk_user_scopes_user FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT fk_user_scopes_scope FOREIGN KEY (scope_id) REFERENCES scopes(id)
 );
 
-insert into roles(id, name) values(nextval('roles_seq'), 'admin');
-insert into roles(id, name) values(nextval('roles_seq'), 'user');
+insert into scopes(id, name) values(nextval('scopes_seq'), 'admin:all');
+insert into scopes(id, name) values(nextval('scopes_seq'), 'stadium:write');
+insert into scopes(id, name) values(nextval('scopes_seq'), 'stadium:read');
+insert into scopes(id, name) values(nextval('scopes_seq'), 'club:write');
+insert into scopes(id, name) values(nextval('scopes_seq'), 'club:read');
+insert into scopes(id, name) values(nextval('scopes_seq'), 'player:write');
+insert into scopes(id, name) values(nextval('scopes_seq'), 'player:read');
 
 insert into users(id, name, email, password, active) values(nextval('users_seq'), 'admin', 'admin@java10x', '$2a$10$VrIbJURwINOR5HOrWFFTNOwSILsioRJSuOGAg8Luvr9qZDSOl5JXG', true);
 insert into users(id, name, email, password, active) values(nextval('users_seq'), 'user', 'user@java10x', '$2a$10$VrIbJURwINOR5HOrWFFTNOwSILsioRJSuOGAg8Luvr9qZDSOl5JXG', true);
 
-insert into users_roles(user_id, role_id) values(1, 1);
-insert into users_roles(user_id, role_id) values(2, 2);
+insert into users_scopes(user_id, scope_id) values(1, 1);
+insert into users_scopes(user_id, scope_id) values(2, 3);
+insert into users_scopes(user_id, scope_id) values(2, 5);
+insert into users_scopes(user_id, scope_id) values(2, 7);

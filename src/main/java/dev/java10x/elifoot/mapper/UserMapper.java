@@ -2,7 +2,7 @@ package dev.java10x.elifoot.mapper;
 
 import dev.java10x.elifoot.controller.request.CreateUserRequest;
 import dev.java10x.elifoot.controller.response.UserResponse;
-import dev.java10x.elifoot.entity.Scopes;
+import dev.java10x.elifoot.entity.Scope;
 import dev.java10x.elifoot.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -21,20 +21,20 @@ public interface UserMapper {
     UserResponse toResponse(User user);
 
     @Named("mapScopeIdsToScopeEntities")
-    default List<Scopes> mapScopeIdsToScopeEntities(List<Long> scopeIds) {
+    default List<Scope> mapScopeIdsToScopeEntities(List<Long> scopeIds) {
         if (scopeIds == null) return Collections.emptyList();
 
         return scopeIds.stream()
-                .map(id -> Scopes.builder().id(id).build())
+                .map(id -> Scope.builder().id(id).build())
                 .toList();
     }
 
     @Named("mapScopeEntitiesToStringScopes")
-    default List<String> mapScopeEntitiesToStringScopes(List<Scopes> scopes) {
+    default List<String> mapScopeEntitiesToStringScopes(List<Scope> scopes) {
         if (scopes == null) return Collections.emptyList();
 
         return scopes.stream()
-                .map(Scopes::getName)
+                .map(Scope::getName)
                 .toList();
     }
 }

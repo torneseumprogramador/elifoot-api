@@ -2,7 +2,7 @@ package dev.java10x.elifoot.service;
 
 import dev.java10x.elifoot.controller.request.LoginRequest;
 import dev.java10x.elifoot.controller.response.LoginResponse;
-import dev.java10x.elifoot.entity.Scopes;
+import dev.java10x.elifoot.entity.Scope;
 import dev.java10x.elifoot.entity.User;
 import dev.java10x.elifoot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +34,7 @@ public class FindUserService {
 
         User usuario = optUser.get();
         List<String> scopes = usuario.getScopes().stream()
-                .map(Scopes::getName)
+                .map(Scope::getName)
                 .toList();
         long expiresIn = 600L;
 

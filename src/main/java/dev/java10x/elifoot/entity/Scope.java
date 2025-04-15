@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "scopes")
-public class Scopes {
+public class Scope {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "scopes_seq")

@@ -30,6 +30,6 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "scope_id")
     )
-    private List<Scopes> scopes = new ArrayList<>();
+    private List<Scope> scopes = new ArrayList<>();
 
 }

@@ -2,7 +2,7 @@ package dev.java10x.elifoot.service;
 
 import dev.java10x.elifoot.controller.request.CreateUserRequest;
 import dev.java10x.elifoot.controller.response.UserResponse;
-import dev.java10x.elifoot.entity.Scopes;
+import dev.java10x.elifoot.entity.Scope;
 import dev.java10x.elifoot.entity.User;
 import dev.java10x.elifoot.exception.ResourceAlreadyExistsException;
 import dev.java10x.elifoot.mapper.UserMapper;
@@ -29,7 +29,7 @@ public class CreateUserService {
             throw new ResourceAlreadyExistsException("Email already exists, email: " + request.getEmail());
         }
 
-        List<Scopes> scopes = request.getScopes().stream()
+        List<Scope> scopes = request.getScopes().stream()
                 .map(findScopeService::findById)
                 .toList();
 

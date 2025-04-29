@@ -1,6 +1,6 @@
 ![java10x Logo](https://java10x.dev/wp-content/uploads/2024/12/logo-java.png)
 
-# Elifoot
+# ⚽ Elifoot
 
 Elifoot é uma aplicação desenvolvida em Java com Spring Boot que simula a gestão de clubes de futebol, incluindo funcionalidades como cadastro de estádios, jogadores, clubes, autenticação e autorização com OAuth2, e controle de permissões via scopes.
 
